@@ -1,0 +1,2 @@
+node index.js
+curl -H "Content-Type: application/json" -d @json/orderpizza.json https://projectantonia.ngrok.io/test/message
