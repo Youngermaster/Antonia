@@ -1,7 +1,7 @@
 import json # This library make us able to convert text to json.
 import os # This library make us be able to execute Os commands
 
-JSON_PATH = 'json/request.json'
+JSON_PATH = 'assets/json/request.json'
 
 # This will be the json to send to the server.
 jsonTest = {
@@ -20,7 +20,7 @@ def generate_json():
         json.dump(jsonTest, outfile)
 
 def execute_curl(jsonName, tunnelUrl):
-    os.system('curl -H "Content-Type: application/json" -d @json/' + jsonName + ' ' + tunnelUrl)
+    os.system('curl -H "Content-Type: application/json" -d @assets/json/' + jsonName + ' ' + tunnelUrl)
 
 def core():
     add_atributes_to_json()

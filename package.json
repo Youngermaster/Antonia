@@ -6,7 +6,8 @@
   "author": "EAFIT - Antonia Computer Science Team",
   "license": "",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "send-json": "python3 sendJson.py"
   },
   "dependencies": {
     "@oracle/bots-node-sdk": "^2.0.0",

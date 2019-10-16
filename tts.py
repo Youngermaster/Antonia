@@ -31,7 +31,7 @@ class Tts:
         ]
         # We extract the information that we need from the cloud configuration file.
         # In this case we are using the text that we need to speech.    
-        with open('cloud.json') as json_file:
+        with open('config/cloud.json') as json_file:
             data = json.load(json_file)
 
             # We store the digital assistant answer.
@@ -41,7 +41,7 @@ class Tts:
             texto = data['channelExtensions']['debugInfo']['variables']['iResult']['query']
 
         # We extract the query initial language from lang configuration file.
-        with open('lang.json') as json_file:
+        with open('config/lang.json') as json_file:
             data = json.load(json_file)
             languaje = data["lang"][0]
 
@@ -64,7 +64,7 @@ class Tts:
                 if i in respuesta:
                     while flag:
                         try:
-                            ruta ='./imagenes/{0}/{1}.jpg'.format(i,random.randint(1,6))
+                            ruta ='./assets/imagenes/{0}/{1}.jpg'.format(i,random.randint(1,6))
                             image = Image.open(ruta)
                             image.show()
                             flag = False
