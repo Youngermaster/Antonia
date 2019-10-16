@@ -1,25 +1,18 @@
-from gtts import gTTS #libreria para llevar el texto a un audio
-import os #libreria para correr el aduio desde la consola, esta libreria permite correr unos commandos de consola
-import json #lireria para cargar json
-from translate import Translator
+from gtts import gTTS # Library to convert text to audio or speech.
+import json # Library to load the json.
+from translate import Translator # Library to Translate.
 from PIL import Image
 import random
 import sys
-
-
-#if x==1:
 
 class Tts:
     def traducir(self,respuesta):
         translator = Translator(from_lang="english",to_lang="spanish")
         palabra = translator.translate(respuesta)
-
         return palabra
 
-
     def __init__(self):
-        #Lista para buscar estas palabras en la respuesta
-        #y cargar una imagen relacionada
+        # List to search someone of the following words in the answer and show a related image.
         lista = [
         "arepa",
         "audio guide",
@@ -35,43 +28,36 @@ class Tts:
         "echange languajes",
         "fruit vegetable",
         "gastronomy comuna 13",
-       # "handcrafts",
         ]
-        #cargamos el archivo de la nube y sacamos la informacionque necesitamos
-        #en este caso el query inicial y el texto que se debe hablar
+        # We extract the information that we need from the cloud configuration file.
+        # In this case we are using the text that we need to speech.    
         with open('cloud.json') as json_file:
             data = json.load(json_file)
 
-            #en respuesta se guarda lo que responde el digital assitant
+            # We store the digital assistant answer.
             respuesta = data['text']
 
-            #en texto se saca el query inicial que se hizo en el stt y se guarda para
-            #luego mostrar un imagen correspondiente con lo que se quiere
+            # We get the STT initial query to show a related image.
             texto = data['channelExtensions']['debugInfo']['variables']['iResult']['query']
 
-
-
-        #aqui se saca el lenguaje inicial del query desde lang.json que es creado con el unico fin
-        #de saber en que lenguaje se hizo el query inicial
+        # We extract the query initial language from lang configuration file.
         with open('lang.json') as json_file:
             data = json.load(json_file)
             languaje = data["lang"][0]
 
         if languaje == "esp":
-            #respuestafinal es la variable en la cual se va a guardar el texto final en el idioma
-            #correspondiente y se llevara a audio
             lang = "es"
-            print("Start PY TTS")
+            print("* DEBUG: START PY TTS *")
+            # We store the final text in the right language.
             respuestafinal = self.traducir(sys.argv[1])
         else:
             lang="en"
             repuestafinal = respuesta
-
         try:
             myobj=gTTS(text=respuestafinal,lang=lang)
+            # We convert the final text on audio.
             myobj.save("answer.mp3")
-            print("End PY TTS")
-            #os.system("ffplay hola.mp3")
+            print("* PYTHON DEBUG: END PY TTS *")
 
             flag = True
             for i in lista:
@@ -92,7 +78,6 @@ class Tts:
                     continue
 
         except Exception as e: print(e)
-
 
 
 Tts()

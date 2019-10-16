@@ -3,3 +3,7 @@ node_modules
 
 # Garbage files
 *.bk
+*.old
+
+# Binary files
+*.mp3

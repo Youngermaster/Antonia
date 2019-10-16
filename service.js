@@ -16,7 +16,8 @@ module.exports = (app) => {
       secret: 'k1P4Vgj1kdDHataDZpSWA0vwDbElWhXS',
     }
   });
-  // Add webhook event handlers (optional)
+
+  // Add webhook event handlers.
   webhook
     .on(WebhookEvent.ERROR, err => logger.error('Error:', err.message))
     .on(WebhookEvent.MESSAGE_SENT, message => logger.info('Message to bot:', message))
@@ -25,13 +26,12 @@ module.exports = (app) => {
       logger.info('Message from bot:', message);
       console.log(MESSAGE_RECEIVED);
       // TODO: implement send to client...
-      logger.info('MessageReceived: ',MESSAGE_RECEIVED);
+      logger.info('MessageReceived: ', MESSAGE_RECEIVED);
     });
 
   // Create endpoint for bot webhook channel configurtion (Outgoing URI)
   // NOTE: webhook.receiver also supports using a callback as a replacement for WebhookEvent.MESSAGE_RECEIVED.
   //  - Useful in cases where custom validations, etc need to be performed.
-
 
   // Integrate with messaging client according to their specific SDKs, etc.
   app.post('/test/message', (req, res) => {
@@ -46,22 +46,21 @@ module.exports = (app) => {
     // send to bot webhook channel
     webhook.send(message)
       .then(() => res.send('ok'), e => res.status(400).end(e.message));
-
   });
 
     app.post('/', (req, res) => {
-    const response = webhook.receiver();
-    res.set('Content-Type', 'application/json');
+      const response = webhook.receiver();
+      res.set('Content-Type', 'application/json');
 
-    res.send(response);
-    var resjson = res.req.body;
-    console.log(resjson.messagePayload.text);
-    console.log("Start TTS");
-    var spawn = require("child_process").spawn;
-    var process = spawn('python3', ['tts.py', resjson.messagePayload.text]);
-    process.stdout.on('data', function(data) { 
-        console.log(data.toString()); 
-    } ) 
-    console.log("End TTS");
-  });
+      res.send(response);
+      var resjson = res.req.body;
+      console.log(resjson.messagePayload.text);
+      console.log("* NODE DEBUG: START PY TTS *");
+      var spawn = require("child_process").spawn;
+      var process = spawn('python3', ['tts.py', resjson.messagePayload.text]);
+      process.stdout.on('data', (data) => { 
+          console.log(data.toString()); 
+      });
+      console.log("* NODE DEBUG: END PY TTS *");
+    });
 }
