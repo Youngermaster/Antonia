@@ -1,6 +1,7 @@
 const OracleBot = require('@oracle/bots-node-sdk');
 const { WebhookClient, WebhookEvent } = OracleBot.Middleware;
 const { spawn } = require('child_process');
+const secretKey = require('./config/config');
 
 module.exports = (app) => {
   const logger = console;
@@ -12,8 +13,8 @@ module.exports = (app) => {
   // add webhook integration
   const webhook = new WebhookClient({
     channel: {
-      url: 'https://botv2phx1I0044H0105B5bots-mpaasocimt.botmxp.ocp.oraclecloud.com:443/connectors/v1/tenants/idcs-100b89d671b54afca3069fe360e4bad4/listeners/webhook/channels/25eb87fc-7945-4d29-9755-0817b16b29ea',
-      secret: 'k1P4Vgj1kdDHataDZpSWA0vwDbElWhXS',
+      url: secretKey.url,
+      secret: secretKey.secret,
     }
   });
 

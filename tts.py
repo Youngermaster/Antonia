@@ -6,8 +6,8 @@ import random
 import sys
 
 class Tts:
-    def traducir(self,respuesta):
-        translator = Translator(from_lang="english",to_lang="spanish")
+    def translate(self, respuesta):
+        translator = Translator(from_lang="english", to_lang="spanish")
         palabra = translator.translate(respuesta)
         return palabra
 
@@ -49,7 +49,7 @@ class Tts:
             lang = "es"
             print("* DEBUG: START PY TTS *")
             # We store the final text in the right language.
-            respuestafinal = self.traducir(sys.argv[1])
+            respuestafinal = self.translate(sys.argv[1])
         else:
             lang="en"
             repuestafinal = respuesta
@@ -64,7 +64,7 @@ class Tts:
                 if i in respuesta:
                     while flag:
                         try:
-                            ruta ='./assets/imagenes/{0}/{1}.jpg'.format(i,random.randint(1,6))
+                            ruta ='./assets/imagenes/{0}/{1}.jpg'.format(i, random.randint(1, 6))
                             image = Image.open(ruta)
                             image.show()
                             flag = False
