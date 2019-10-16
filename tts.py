@@ -5,6 +5,8 @@ from PIL import Image
 import random
 import sys
 
+ANSWER_PATH = "/home/pi/answer/answer.mp3"
+
 class Tts:
     def translate(self, respuesta):
         translator = Translator(from_lang="english", to_lang="spanish")
@@ -56,26 +58,8 @@ class Tts:
         try:
             myobj=gTTS(text=respuestafinal,lang=lang)
             # We convert the final text on audio.
-            myobj.save("answer.mp3")
+            myobj.save(ANSWER_PATH)
             print("* PYTHON DEBUG: END PY TTS *")
-
-            flag = True
-            for i in lista:
-                if i in respuesta:
-                    while flag:
-                        try:
-                            ruta ='./assets/imagenes/{0}/{1}.jpg'.format(i, random.randint(1, 6))
-                            image = Image.open(ruta)
-                            image.show()
-                            flag = False
-                        except Exception as e: print(e)
-                else:
-                    continue
-
-                if not flag:
-                    break
-                else :
-                    continue
 
         except Exception as e: print(e)
 
