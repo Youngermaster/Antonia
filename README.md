@@ -10,7 +10,7 @@ Start the server.
 
     npm start
 
-Make a 'public' tunnel to the server.
+Make a 'public' tunnel to the server (Isn't necessary to have ngrok in the Antonia folder).
 
     ./ngrok http --subdomain=projectantonia 3000
 
