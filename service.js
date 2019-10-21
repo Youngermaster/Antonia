@@ -1,7 +1,7 @@
 const OracleBot = require('@oracle/bots-node-sdk');
 const { WebhookClient, WebhookEvent } = OracleBot.Middleware;
 const { spawn } = require('child_process');
-const secretKey = require('./config/config');
+const secretKey = require('/home/pi/Antonia/config/config');
 
 module.exports = (app) => {
   const logger = console;
@@ -58,7 +58,7 @@ module.exports = (app) => {
       console.log(resjson.messagePayload.text);
       console.log("* NODE DEBUG: START PY TTS *");
       var spawn = require("child_process").spawn;
-      var process = spawn('python3', ['tts.py', resjson.messagePayload.text]);
+      var process = spawn('/home/pi/mycroft-core/.venv/bin/python', ['/home/pi/Antonia/tts.py', resjson.messagePayload.text]);
       process.stdout.on('data', (data) => { 
           console.log(data.toString()); 
       });
