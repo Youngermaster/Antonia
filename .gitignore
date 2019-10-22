@@ -7,3 +7,6 @@ node_modules
 
 # Binary files
 *.mp3
+
+# Secret Key
+config/config.js

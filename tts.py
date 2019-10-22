@@ -6,6 +6,8 @@ import random
 import sys
 
 ANSWER_PATH = "/home/pi/answer/answer.mp3"
+CLOUD_PATH = '/home/pi/Antonia/config/cloud.json'
+LANG_PATH = '/home/pi/Antonia/config/lang.json'
 
 class Tts:
     def translate(self, respuesta):
@@ -33,7 +35,7 @@ class Tts:
         ]
         # We extract the information that we need from the cloud configuration file.
         # In this case we are using the text that we need to speech.    
-        with open('/home/pi/Antonia/config/cloud.json') as json_file:
+        with open(CLOUD_PATH) as json_file:
             data = json.load(json_file)
 
             # We store the digital assistant answer.
@@ -43,7 +45,7 @@ class Tts:
             texto = data['channelExtensions']['debugInfo']['variables']['iResult']['query']
 
         # We extract the query initial language from lang configuration file.
-        with open('/home/pi/Antonia/config/lang.json') as json_file:
+        with open(LANG_PATH) as json_file:
             data = json.load(json_file)
             languaje = data["lang"][0]
 
